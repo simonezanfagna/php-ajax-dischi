@@ -1,3 +1,4 @@
+<?php include 'data.php' ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -12,19 +13,23 @@
     </header>
 
     <main>
+
       <select id="genere">
         <option value="">Scegli un genere</option>
-        <option value="pop">Pop</option>
-        <option value="rock">Rock</option>
-        <option value="jazz">Jazz</option>
-        <option value="metal">Metal</option>
+        <?php $generiLista = []; ?>
+        <?php foreach ($dischi as $key => $disco) {
+          var_dump($disco['genre']);
+          if (!in_array($disco['genre'], $generiLista)) {
+            array_push($generiLista, $disco['genre']); ?>
+            <option value="<?php echo $disco['genre']; ?>"><?php echo $disco['genre']; ?></option>
+          <?php }?>
+        <?php } ?>
       </select>
+
       <div class="container">
 
-        <?php include 'data.php' ?>
-
         <?php foreach ($dischi as $key => $disco) {?>
-          <div id="template-disco" class="container-disco" data-genere = <?php echo $disco['genre']; ?>>
+          <div id="template-disco" class="container-disco" data-genere ="<?php echo $disco['genre']; ?>">
             <img class="copertina-album" src=<?php echo $disco['poster']; ?> alt="">
             <p class="titolo-album"><?php echo $disco['title']; ?></p>
             <p class="artista"><?php echo $disco['author']; ?></p>
